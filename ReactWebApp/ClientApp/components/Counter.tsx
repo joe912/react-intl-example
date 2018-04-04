@@ -3,15 +3,14 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState }  from '../store';
 import * as CounterStore from '../store/Counter';
-import * as WeatherForecasts from '../store/WeatherForecasts';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 
 type CounterProps =
     CounterStore.CounterState
     & typeof CounterStore.actionCreators
     & RouteComponentProps<{}>;
 
-class Counter extends React.Component<CounterProps, {}> {
+class CounterWrapped extends React.Component<CounterProps & InjectedIntlProps, {}> {
     public render() {
         var currentcount = this.props.count;
 
@@ -30,11 +29,13 @@ class Counter extends React.Component<CounterProps, {}> {
                     <button onClick={ () => { this.props.increment() } }>Increment</button>
                    </div>
                 <div>
-                    This is an input with placeholder: <input placeholder="enter some text..." />
+                    This is an input with placeholder: <input placeholder={this.props.intl.formatMessage({id: "counter.placeholder"})} />
                 </div>
             </div>;
     }
 }
+
+const Counter = injectIntl(CounterWrapped);
 
 // Wire up the React component to the Redux store
 export default connect(

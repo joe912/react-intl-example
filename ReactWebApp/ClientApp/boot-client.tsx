@@ -15,7 +15,7 @@ import * as  en from 'react-intl/locale-data/en';
 import * as  fr from 'react-intl/locale-data/fr';
 
 import messages  from './messages';
-let locale = 'en-GB'; //TODO: get from browser or user
+let locale = 'fr-FR'; //TODO: get from browser or user
 
 addLocaleData([...en, ...fr]);
 
