@@ -1,11 +1,14 @@
-﻿
-//export interface IMessage : { } ????
+﻿interface IMessage { [index:string] : any }  
 
-export default {
+const clientResources : IMessage = {
     'en-GB': {
-        'testcomponent.testkey': 'this is a resourced string'
+        'counter.title': 'Counter (resourced)',
+        'counter.currentcount': 'Current count (resourced): <strong>{mycount}</strong>'
     },
     'fr-FR': {
-        'testcomponent.testkey': 'this is a resourced string'
-    },
-}
+        'counter.title': 'Compte ',
+        'counter.currentcount': 'Compte actuel: <strong>{mycount}</strong>'
+    }
+};
+
+export default clientResources;

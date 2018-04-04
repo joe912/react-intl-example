@@ -9,12 +9,15 @@ import { createBrowserHistory } from 'history';
 import configureStore from './configureStore';
 import { ApplicationState }  from './store';
 import * as RoutesModule from './routes';
-import { IntlProvider} from 'react-intl';
+import { addLocaleData, IntlProvider} from 'react-intl';
 
-//import en from 'react-intl/locale-data/en';
+import * as  en from 'react-intl/locale-data/en';
+import * as  fr from 'react-intl/locale-data/fr';
 
-import { messages } from './messages';
+import messages  from './messages';
 let locale = 'en-GB'; //TODO: get from browser or user
+
+addLocaleData([...en, ...fr]);
 
 let routes = RoutesModule.routes;
 
@@ -31,10 +34,10 @@ function renderApp() {
     // and injects the app into a DOM element.
     ReactDOM.render(
         <IntlProvider locale={locale} messages={messages[locale]} >
-        <AppContainer>
-            <Provider store={ store }>
-                <ConnectedRouter history={ history } children={ routes } />
-            </Provider>
+            <AppContainer>
+                <Provider store={ store }>
+                    <ConnectedRouter history={ history } children={ routes } />
+                </Provider>
             </AppContainer>
         </IntlProvider>,
         document.getElementById('react-app')

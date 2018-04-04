@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ApplicationState }  from '../store';
 import * as CounterStore from '../store/Counter';
 import * as WeatherForecasts from '../store/WeatherForecasts';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 type CounterProps =
     CounterStore.CounterState
@@ -12,15 +13,26 @@ type CounterProps =
 
 class Counter extends React.Component<CounterProps, {}> {
     public render() {
+        var currentcount = this.props.count;
+
         return <div>
-            <h1>Counter</h1>
+                <div>
+                    <h1>
+                        <FormattedMessage id='counter.title' />
+                    </h1>
 
-            <p>This is a simple example of a React component.</p>
+                    <p>This is a simple example of a React component.</p>
 
-            <p>Current count: <strong>{ this.props.count }</strong></p>
+                    <p>
+                        <FormattedHTMLMessage id='counter.currentcount' values={{mycount: currentcount}}/>
+                    </p>
 
-            <button onClick={ () => { this.props.increment() } }>Increment</button>
-        </div>;
+                    <button onClick={ () => { this.props.increment() } }>Increment</button>
+                   </div>
+                <div>
+                    This is an input with placeholder: <input placeholder="enter some text..." />
+                </div>
+            </div>;
     }
 }
 
